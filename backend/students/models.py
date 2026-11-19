@@ -6,5 +6,6 @@ class Student(models.Model):
     email=models.EmailField()
     age=models.IntegerField()
     department = models.CharField(max_length=100)
-    def _str_(self):
+    def __str__(self):
         return self.name
+    #ORM Operation 
