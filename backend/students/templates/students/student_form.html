@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f1f5f9;
+            min-height: 100vh;
+            color: #1e293b;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(120deg, #1e3a8a, #4338ca);
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(30, 58, 138, 0.2);
+        }
+
+        .navbar h2 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar h2 span {
+            color: #93c5fd;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            padding: 11px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        /* Welcome Section */
+        .welcome-box {
+            background: linear-gradient(120deg, #ffffff, #eff6ff);
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+            margin-bottom: 35px;
+            border-left: 6px solid #3b82f6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-box::after {
+            content: "🎓";
+            position: absolute;
+            right: 45px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 85px;
+            opacity: 0.12;
+        }
+
+        .welcome-box h1 {
+            color: #1e3a8a;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .username {
+            color: #2563eb;
+        }
+
+        .welcome-box p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        .welcome-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Section Heading */
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .section-title span {
+            color: #3b82f6;
+        }
+
+        /* Dashboard Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+            text-align: center;
+            transition: all 0.35s ease;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+            transform: scaleX(0);
+            transition: 0.3s;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.13);
+        }
+
+        .card-icon {
+            width: 75px;
+            height: 75px;
+            background: #eff6ff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin: 0 auto 20px;
+            transition: 0.3s;
+        }
+
+        .card:hover .card-icon {
+            background: #dbeafe;
+            transform: rotate(5deg) scale(1.08);
+        }
+
+        .card h3 {
+            color: #1e40af;
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .card-link:hover {
+            color: #1e40af;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 50px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 18px 20px;
+            }
+
+            .navbar h2 {
+                font-size: 17px;
+            }
+
+            .logout-btn {
+                padding: 9px 15px;
+                font-size: 12px;
+            }
+
+            .container {
+                margin: 25px auto;
+                padding: 15px;
+            }
+
+            .welcome-box {
+                padding: 28px 22px;
+            }
+
+            .welcome-box h1 {
+                font-size: 23px;
+            }
+
+            .welcome-box::after {
+                font-size: 55px;
+                right: 15px;
+                opacity: 0.08;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .card {
+                padding: 25px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar h2 {
+                font-size: 14px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-box h1 {
+                font-size: 21px;
+            }
+
+            .welcome-box p {
+                font-size: 13px;
+            }
+
+            .section-title {
+                font-size: 19px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>🎓 Student <span>Management System</span></h2>
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">
+                Logout ↗
+            </button>
+        </form>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="container">
+
+        <!-- Welcome Section -->
+        <div class="welcome-box">
+
+            <span class="welcome-tag">STUDENT PORTAL</span>
+
+            <h1>
+                Welcome,
+                <span class="username">{{ user.username }}</span>!
+            </h1>
+
+            <p>
+                You have successfully logged into your student dashboard.
+                Manage your student activities easily from here.
+            </p>
+
+        </div>
+
+        <!-- Dashboard Section -->
+        <h2 class="section-title">
+            Dashboard <span>Overview</span>
+        </h2>
+
+        <!-- Dashboard Cards -->
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-icon">👨‍🎓</div>
+                <h3>Students</h3>
+                <p>Manage student information, view student details and maintain student records.</p>
+                <a href="#" class="card-link">Explore More →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📝</div>
+                <h3>Registration</h3>
+                <p>Register new students and manage their admission information easily.</p>
+                <a href="#" class="card-link">Explore More →</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Reports</h3>
+                <p>View student reports, academic information and other important records.</p>
+                <a href="#" class="card-link">Explore More →</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2026 Student Management System | All Rights Reserved</p>
+    </div>
+
+</body>
+</html>
